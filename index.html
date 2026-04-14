@@ -594,6 +594,95 @@
       line-height: 1.6;
     }
 
+    /* Category Navigation */
+    .category-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+      padding: 0 1rem;
+    }
+
+    .category-tab {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--primary-dark);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category-tab:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .category-tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .category-tab .icon {
+      font-size: 1.1rem;
+    }
+
+    /* Category Section */
+    .category-section {
+      margin-bottom: 3rem;
+      padding-top: 1rem;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .category-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .category-info h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .category-info p {
+      font-size: 0.85rem;
+      color: var(--text-gray);
+    }
+
+    .category-products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .category-section[hidden] {
+      display: none;
+    }
+
     /* Quality & Service */
     .quality-grid {
       display: grid;
@@ -921,6 +1010,13 @@
       .section { padding: 4rem 1.5rem; }
       .section-title { font-size: 2rem; }
       .products-grid { grid-template-columns: 1fr; }
+      .category-nav { gap: 0.5rem; }
+      .category-tab { padding: 0.6rem 1rem; font-size: 0.8rem; }
+      .category-tab .icon { font-size: 0.95rem; }
+      .category-products { grid-template-columns: 1fr; }
+      .category-header { gap: 0.75rem; }
+      .category-icon { width: 40px; height: 40px; font-size: 1.2rem; border-radius: 10px; }
+      .category-info h3 { font-size: 1.1rem; }
       .locations-grid { grid-template-columns: 1fr; }
       .about-features { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
@@ -1178,108 +1274,210 @@
     <p class="section-desc" data-lang="zh">涵盖木工业、食品业、纸品业、塑胶业、服装业等八大品类，支持来图定制，材质、规格均可按需生产。</p>
     <p class="section-desc" data-lang="en">Widely used in machining, electronics, automotive, aerospace and other industries, meeting diverse precision processing requirements.</p>
 
-    <div class="products-grid">
-      <div class="product-card">
-        <div class="product-img">
-          <img src="images/product_01.png" alt="Woodworking Knives" loading="lazy" width="400" height="300">
-        </div>
-        <div class="product-body">
-          <div class="product-tag" data-lang="zh">木工业用刀</div>
-          <div class="product-tag" data-lang="en">Woodworking</div>
-          <h3 class="product-name">木工业用刀系列</h3>
-          <p class="product-desc" data-lang="zh">平刨刀、指接刀、电动刨刀等多种品类，钨钢、高速钢等材质，适用于各类木材加工。</p>
-          <p class="product-desc" data-lang="en">Planer knives, finger joint knives, electric planer knives and more in tungsten carbide and HSS materials.</p>
+    <!-- Category Navigation -->
+    <div class="category-nav">
+      <button class="category-tab active" data-category="all">
+        <span class="icon">&#9776;</span>
+        <span data-lang="zh">全部</span>
+        <span data-lang="en">All</span>
+      </button>
+      <button class="category-tab" data-category="woodworking">
+        <span class="icon">&#127807;</span>
+        <span data-lang="zh">家具制造</span>
+        <span data-lang="en">Woodworking</span>
+      </button>
+      <button class="category-tab" data-category="food">
+        <span class="icon">&#127828;</span>
+        <span data-lang="zh">食品加工</span>
+        <span data-lang="en">Food</span>
+      </button>
+      <button class="category-tab" data-category="plastic">
+        <span class="icon">&#127891;</span>
+        <span data-lang="zh">塑料加工</span>
+        <span data-lang="en">Plastic</span>
+      </button>
+      <button class="category-tab" data-category="apparel">
+        <span class="icon">&#128086;</span>
+        <span data-lang="zh">服装纺织</span>
+        <span data-lang="en">Apparel</span>
+      </button>
+      <button class="category-tab" data-category="industrial">
+        <span class="icon">&#9881;</span>
+        <span data-lang="zh">工业通用</span>
+        <span data-lang="en">Industrial</span>
+      </button>
+    </div>
+
+    <!-- Category: Woodworking -->
+    <div class="category-section" data-category="woodworking">
+      <div class="category-header">
+        <div class="category-icon">&#127807;</div>
+        <div class="category-info">
+          <h3 data-lang="zh">家具制造</h3>
+          <h3 data-lang="en">Woodworking</h3>
+          <p data-lang="zh">平刨刀、指接刀、电动刨刀等多种品类</p>
+          <p data-lang="en">Planer knives, finger joint knives, electric planer knives</p>
         </div>
       </div>
-
-      <div class="product-card">
-        <div class="product-img">
-          <img src="images/product_04.png" alt="Food Industry Knives" loading="lazy" width="400" height="300">
-        </div>
-        <div class="product-body">
-          <div class="product-tag" data-lang="zh">食品业用刀</div>
-          <div class="product-tag" data-lang="en">Food Processing</div>
-          <h3 class="product-name">食品业用刀系列</h3>
-          <p class="product-desc" data-lang="zh">切肉刀、碎肉刀、绞肉刀等多种品类，不锈钢等特殊材质，满足食品加工卫生标准。</p>
-          <p class="product-desc" data-lang="en">Slicing, meat grinding and mincing knives in stainless steel, meeting food safety standards.</p>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">
-          <img src="images/product_06.png" alt="Paper Industry Knives" loading="lazy" width="400" height="300">
-        </div>
-        <div class="product-body">
-          <div class="product-tag" data-lang="zh">纸品业用刀</div>
-          <div class="product-tag" data-lang="en">Paper Industry</div>
-          <h3 class="product-name">纸品业用刀系列</h3>
-          <p class="product-desc" data-lang="zh">分条刀、修边刀等多种品类，高速钢、工具钢材质，适用于纸张分切加工。</p>
-          <p class="product-desc" data-lang="en">Slitting knives and trimming knives in high-speed steel and tool steel for paper processing.</p>
+      <div class="category-products">
+        <div class="product-card">
+          <div class="product-img">
+            <img src="images/product_01.png" alt="Woodworking Knives" loading="lazy" width="400" height="300">
+          </div>
+          <div class="product-body">
+            <div class="product-tag" data-lang="zh">木工业用刀</div>
+            <div class="product-tag" data-lang="en">Woodworking</div>
+            <h3 class="product-name">木工业用刀系列</h3>
+            <p class="product-desc" data-lang="zh">平刨刀、指接刀、电动刨刀等多种品类，钨钢、高速钢等材质，适用于各类木材加工。</p>
+            <p class="product-desc" data-lang="en">Planer knives, finger joint knives, electric planer knives and more in tungsten carbide and HSS materials.</p>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="product-card">
-        <div class="product-img">
-          <img src="images/product_05.png" alt="Plastic Industry Knives" loading="lazy" width="400" height="300">
-        </div>
-        <div class="product-body">
-          <div class="product-tag" data-lang="zh">塑胶业用刀</div>
-          <div class="product-tag" data-lang="en">Plastic Industry</div>
-          <h3 class="product-name">塑胶业用刀系列</h3>
-          <p class="product-desc" data-lang="zh">塑胶粉碎机刀片等多种品类，高速钢、工具钢材质，适用于塑料回收加工。</p>
-          <p class="product-desc" data-lang="en">Plastic granulator knives and crusher blades in HSS and tool steel for plastic recycling.</p>
+    <!-- Category: Food Processing -->
+    <div class="category-section" data-category="food">
+      <div class="category-header">
+        <div class="category-icon">&#127828;</div>
+        <div class="category-info">
+          <h3 data-lang="zh">食品加工</h3>
+          <h3 data-lang="en">Food Processing</h3>
+          <p data-lang="zh">切肉刀、碎肉刀、绞肉刀等多种品类</p>
+          <p data-lang="en">Slicing, meat grinding and mincing knives</p>
         </div>
       </div>
-
-      <div class="product-card">
-        <div class="product-img">
-          <img src="images/product_07.png" alt="Hand Tools" loading="lazy" width="400" height="300">
-        </div>
-        <div class="product-body">
-          <div class="product-tag" data-lang="zh">手动工具</div>
-          <div class="product-tag" data-lang="en">Hand Tools</div>
-          <h3 class="product-name">手动工具系列</h3>
-          <p class="product-desc" data-lang="zh">管钳、剪刀等多种品类，工具钢、碳钢等材质，耐用可靠，适用于多种工业场景。</p>
-          <p class="product-desc" data-lang="en">Pipe wrenches, scissors and more in tool steel and carbon steel for industrial applications.</p>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">
-          <img src="images/product_02.png" alt="Apparel Industry" loading="lazy" width="400" height="300">
-        </div>
-        <div class="product-body">
-          <div class="product-tag" data-lang="zh">服装业用刀</div>
-          <div class="product-tag" data-lang="en">Apparel Industry</div>
-          <h3 class="product-name">服装业用刀系列</h3>
-          <p class="product-desc" data-lang="zh">裁刀、剪刀等多种品类，高速钢、工具钢材质，适用于服装裁剪加工。</p>
-          <p class="product-desc" data-lang="en">Cutting knives and scissors in high-speed steel and tool steel for garment manufacturing.</p>
+      <div class="category-products">
+        <div class="product-card">
+          <div class="product-img">
+            <img src="images/product_04.png" alt="Food Industry Knives" loading="lazy" width="400" height="300">
+          </div>
+          <div class="product-body">
+            <div class="product-tag" data-lang="zh">食品业用刀</div>
+            <div class="product-tag" data-lang="en">Food Processing</div>
+            <h3 class="product-name">食品业用刀系列</h3>
+            <p class="product-desc" data-lang="zh">切肉刀、碎肉刀、绞肉刀等多种品类，不锈钢等特殊材质，满足食品加工卫生标准。</p>
+            <p class="product-desc" data-lang="en">Slicing, meat grinding and mincing knives in stainless steel, meeting food safety standards.</p>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="product-card">
-        <div class="product-img">
-          <img src="images/product_03.png" alt="Stationery Industry" loading="lazy" width="400" height="300">
-        </div>
-        <div class="product-body">
-          <div class="product-tag" data-lang="zh">文具业用刀</div>
-          <div class="product-tag" data-lang="en">Stationery Industry</div>
-          <h3 class="product-name">文具业用刀系列</h3>
-          <p class="product-desc" data-lang="zh">胶带分条刀、裁纸刀等多种品类，高速钢、合金钢材质，适用于文具制造。</p>
-          <p class="product-desc" data-lang="en">Tape slitting knives and paper cutting knives in high-speed steel and alloy steel.</p>
+    <!-- Category: Plastic -->
+    <div class="category-section" data-category="plastic">
+      <div class="category-header">
+        <div class="category-icon">&#127891;</div>
+        <div class="category-info">
+          <h3 data-lang="zh">塑料加工</h3>
+          <h3 data-lang="en">Plastic Processing</h3>
+          <p data-lang="zh">塑胶粉碎机刀片等多种品类</p>
+          <p data-lang="en">Plastic granulator knives and crusher blades</p>
         </div>
       </div>
-
-      <div class="product-card">
-        <div class="product-img">
-          <img src="images/page24_Image543.png" alt="Other Industries" loading="lazy" width="400" height="300">
+      <div class="category-products">
+        <div class="product-card">
+          <div class="product-img">
+            <img src="images/product_05.png" alt="Plastic Industry Knives" loading="lazy" width="400" height="300">
+          </div>
+          <div class="product-body">
+            <div class="product-tag" data-lang="zh">塑胶业用刀</div>
+            <div class="product-tag" data-lang="en">Plastic Industry</div>
+            <h3 class="product-name">塑胶业用刀系列</h3>
+            <p class="product-desc" data-lang="zh">塑胶粉碎机刀片等多种品类，高速钢、工具钢材质，适用于塑料回收加工。</p>
+            <p class="product-desc" data-lang="en">Plastic granulator knives and crusher blades in HSS and tool steel for plastic recycling.</p>
+          </div>
         </div>
-        <div class="product-body">
-          <div class="product-tag" data-lang="zh">其他产业用刀</div>
-          <div class="product-tag" data-lang="en">Other Industries</div>
-          <h3 class="product-name">其他产业用刀系列</h3>
-          <p class="product-desc" data-lang="zh">异型刀及各种产业用刀，材质、规格、尺寸可由客户指定，灵活定制。</p>
-          <p class="product-desc" data-lang="en">Custom-shaped knives for various industrial applications. Materials, specs and sizes can be customized.</p>
+      </div>
+    </div>
+
+    <!-- Category: Apparel -->
+    <div class="category-section" data-category="apparel">
+      <div class="category-header">
+        <div class="category-icon">&#128086;</div>
+        <div class="category-info">
+          <h3 data-lang="zh">服装纺织</h3>
+          <h3 data-lang="en">Apparel & Textile</h3>
+          <p data-lang="zh">裁刀、剪刀等多种品类</p>
+          <p data-lang="en">Cutting knives and scissors</p>
+        </div>
+      </div>
+      <div class="category-products">
+        <div class="product-card">
+          <div class="product-img">
+            <img src="images/product_02.png" alt="Apparel Industry" loading="lazy" width="400" height="300">
+          </div>
+          <div class="product-body">
+            <div class="product-tag" data-lang="zh">服装业用刀</div>
+            <div class="product-tag" data-lang="en">Apparel Industry</div>
+            <h3 class="product-name">服装业用刀系列</h3>
+            <p class="product-desc" data-lang="zh">裁刀、剪刀等多种品类，高速钢、工具钢材质，适用于服装裁剪加工。</p>
+            <p class="product-desc" data-lang="en">Cutting knives and scissors in high-speed steel and tool steel for garment manufacturing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category: Industrial (General) -->
+    <div class="category-section" data-category="industrial">
+      <div class="category-header">
+        <div class="category-icon">&#9881;</div>
+        <div class="category-info">
+          <h3 data-lang="zh">工业通用</h3>
+          <h3 data-lang="en">Industrial General</h3>
+          <p data-lang="zh">纸品业用刀、手动工具、文具业用刀等</p>
+          <p data-lang="en">Paper industry, hand tools, stationery knives and more</p>
+        </div>
+      </div>
+      <div class="category-products">
+        <div class="product-card">
+          <div class="product-img">
+            <img src="images/product_06.png" alt="Paper Industry Knives" loading="lazy" width="400" height="300">
+          </div>
+          <div class="product-body">
+            <div class="product-tag" data-lang="zh">纸品业用刀</div>
+            <div class="product-tag" data-lang="en">Paper Industry</div>
+            <h3 class="product-name">纸品业用刀系列</h3>
+            <p class="product-desc" data-lang="zh">分条刀、修边刀等多种品类，高速钢、工具钢材质，适用于纸张分切加工。</p>
+            <p class="product-desc" data-lang="en">Slitting knives and trimming knives in high-speed steel and tool steel for paper processing.</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img">
+            <img src="images/product_07.png" alt="Hand Tools" loading="lazy" width="400" height="300">
+          </div>
+          <div class="product-body">
+            <div class="product-tag" data-lang="zh">手动工具</div>
+            <div class="product-tag" data-lang="en">Hand Tools</div>
+            <h3 class="product-name">手动工具系列</h3>
+            <p class="product-desc" data-lang="zh">管钳、剪刀等多种品类，工具钢、碳钢等材质，耐用可靠，适用于多种工业场景。</p>
+            <p class="product-desc" data-lang="en">Pipe wrenches, scissors and more in tool steel and carbon steel for industrial applications.</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img">
+            <img src="images/product_03.png" alt="Stationery Industry" loading="lazy" width="400" height="300">
+          </div>
+          <div class="product-body">
+            <div class="product-tag" data-lang="zh">文具业用刀</div>
+            <div class="product-tag" data-lang="en">Stationery Industry</div>
+            <h3 class="product-name">文具业用刀系列</h3>
+            <p class="product-desc" data-lang="zh">胶带分条刀、裁纸刀等多种品类，高速钢、合金钢材质，适用于文具制造。</p>
+            <p class="product-desc" data-lang="en">Tape slitting knives and paper cutting knives in high-speed steel and alloy steel.</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img">
+            <img src="images/page24_Image543.png" alt="Other Industries" loading="lazy" width="400" height="300">
+          </div>
+          <div class="product-body">
+            <div class="product-tag" data-lang="zh">其他产业用刀</div>
+            <div class="product-tag" data-lang="en">Other Industries</div>
+            <h3 class="product-name">其他产业用刀系列</h3>
+            <p class="product-desc" data-lang="zh">异型刀及各种产业用刀，材质、规格、尺寸可由客户指定，灵活定制。</p>
+            <p class="product-desc" data-lang="en">Custom-shaped knives for various industrial applications. Materials, specs and sizes can be customized.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1669,6 +1867,29 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Category filtering
+  const categoryTabs = document.querySelectorAll('.category-tab');
+  const categorySections = document.querySelectorAll('.category-section');
+
+  categoryTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const category = tab.dataset.category;
+
+      // Update active tab
+      categoryTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Filter sections
+      if (category === 'all') {
+        categorySections.forEach(section => section.hidden = false);
+      } else {
+        categorySections.forEach(section => {
+          section.hidden = section.dataset.category !== category;
+        });
+      }
+    });
+  });
 </script>
 
 </body>
